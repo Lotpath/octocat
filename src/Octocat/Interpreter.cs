@@ -25,6 +25,7 @@ namespace Octocat
             _handlers.Add(new CreateRepositoryCommandHandler(_client));
             _handlers.Add(new DeleteLabelsCommandHandler(_client));
             _handlers.Add(new ConfigureLabelsCommandHandler(_client));
+            _handlers.Add(new AssignTeamToRepositoryCommandHandler(_client));
 
             _handlers.Add(new ExitApplicationCommandHandler());
             _handlers.Add(new DisplayHelpCommandHandler(_console, _handlers));
@@ -59,7 +60,15 @@ namespace Octocat
         public async Task Interpret(string input)
         {
             var command = ParseCommand(input);
-            var handler = _handlers.First(x => x.CanHandle(command));
+            ICommandHandler handler = null;
+            foreach (var item in _handlers)
+            {
+                if (await item.CanHandle(command))
+                {
+                    handler = item;
+                    break;
+                }
+            }
             await handler.Handle(command);
         }
     }

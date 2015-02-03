@@ -12,9 +12,12 @@ namespace Octocat.Handlers
             _client = client;
         }
 
-        public bool CanHandle(Command command)
+        public Task<bool> CanHandle(Command command)
         {
-            return command.Verb == "create" && command.Noun == "repository";
+            return Task.Run(
+                () =>
+                command.Verb == "create"
+                && command.Noun == "repository");
         }
 
         public async Task Handle(Command command)

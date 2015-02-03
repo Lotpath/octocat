@@ -15,9 +15,12 @@ namespace Octocat.Handlers
             _console = console;
         }
 
-        public bool CanHandle(Command command)
+        public Task<bool> CanHandle(Command command)
         {
-            return command.Verb == "list" && command.Noun == "repositories";
+            return Task.Run(
+                () =>
+                command.Verb == "list"
+                && command.Noun == "repositories");
         }
 
         public async Task Handle(Command command)
