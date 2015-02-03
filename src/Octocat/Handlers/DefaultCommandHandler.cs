@@ -11,9 +11,9 @@ namespace Octocat.Handlers
             _console = console;
         }
 
-        public bool CanHandle(Command command)
+        public Task<bool> CanHandle(Command command)
         {
-            return true;
+            return Task.Run(() => true);
         }
 
         public Task Handle(Command command)

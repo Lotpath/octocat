@@ -4,9 +4,9 @@ namespace Octocat.Handlers
 {
     public class ExitApplicationCommandHandler : ICommandHandler
     {
-        public bool CanHandle(Command command)
+        public Task<bool> CanHandle(Command command)
         {
-            return command.Verb == "q";
+            return Task.Run(() => command.Verb == "q");
         }
 
         public Task Handle(Command command)

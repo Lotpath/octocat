@@ -4,7 +4,7 @@ namespace Octocat.Handlers
 {
     public interface ICommandHandler
     {
-        bool CanHandle(Command command);
+        Task<bool> CanHandle(Command command);
         Task Handle(Command command);
     }
 }

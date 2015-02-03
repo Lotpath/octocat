@@ -43,6 +43,21 @@ namespace Octocat.Tests
         }
 
         [Fact]
+        public async Task can_assign_a_team_to_a_repository()
+        {
+            A.CallTo(() => _client.Organization.Team.GetAll("org"))
+             .Returns(new ReadOnlyCollection<Team>(new List<Team>
+                 {
+                     new Team {Id = 99, Name = "team"}
+                 }));
+
+            await _interpreter.Interpret("assign team org/repo");
+
+            A.CallTo(() => _client.Organization.Team.AddRepository(99, "org", "repo"))
+                .MustHaveHappened();
+        }
+
+        [Fact]
         public async Task can_list_repositories_for_an_organization()
         {
             await _interpreter.Interpret("list repositories org");
