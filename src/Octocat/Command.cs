@@ -6,5 +6,6 @@
         public string Noun { get; set; }
         public string Organization { get; set; }
         public string Repository { get; set; }
+        public string Target { get; set; }
     }
 }

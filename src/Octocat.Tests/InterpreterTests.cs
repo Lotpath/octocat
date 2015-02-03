@@ -48,13 +48,23 @@ namespace Octocat.Tests
             A.CallTo(() => _client.Organization.Team.GetAll("org"))
              .Returns(new ReadOnlyCollection<Team>(new List<Team>
                  {
-                     new Team {Id = 99, Name = "team"}
+                     new Team {Id = 99, Name = "devs"}
                  }));
 
-            await _interpreter.Interpret("assign team org/repo");
+            await _interpreter.Interpret("assign team org/repo devs");
 
             A.CallTo(() => _client.Organization.Team.AddRepository(99, "org", "repo"))
                 .MustHaveHappened();
+        }
+
+        [Fact]
+        public async Task can_create_a_new_milestone()
+        {
+            await _interpreter.Interpret("create milestone org/repo 0.1.0");
+
+            A.CallTo(() =>
+                     _client.Issue.Milestone.Create("org", "repo", A<NewMilestone>.That.Matches(x => x.Title == "0.1.0")))
+             .MustHaveHappened();
         }
 
         [Fact]
