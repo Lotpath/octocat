@@ -52,6 +52,7 @@
     <Compile Include="Handlers\AssignTeamToRepositoryCommandHandler.cs" />
     <Compile Include="Handlers\ConfigureLabelsCommandHandler.cs" />
     <Compile Include="ConsoleImpl.cs" />
+    <Compile Include="Handlers\CreateMilestoneCommandHandler.cs" />
     <Compile Include="Handlers\CreateRepositoryCommandHandler.cs" />
     <Compile Include="Handlers\DefaultCommandHandler.cs" />
     <Compile Include="Handlers\DeleteLabelsCommandHandler.cs" />
