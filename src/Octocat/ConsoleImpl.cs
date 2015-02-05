@@ -13,5 +13,10 @@ namespace Octocat
         {
             return Console.ReadLine();
         }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
     }
 }

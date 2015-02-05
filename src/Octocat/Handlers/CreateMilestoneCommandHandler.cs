@@ -27,5 +27,10 @@ namespace Octocat.Handlers
                 command.Repository,
                 new NewMilestone(command.Target));
         }
+
+        public override string ToString()
+        {
+            return "create milestone [organization]/[repository] [milestone-name] (creates a milestone for the specified repository with the given name)";
+        }
     }
 }
