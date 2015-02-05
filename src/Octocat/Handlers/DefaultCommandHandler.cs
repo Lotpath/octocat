@@ -21,5 +21,10 @@ namespace Octocat.Handlers
             _console.WriteLine("Unknown command");
             return Task.Delay(0);
         }
+
+        public override string ToString()
+        {
+            return "";
+        }
     }
 }

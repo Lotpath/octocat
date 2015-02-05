@@ -6,12 +6,12 @@ namespace Octocat
     public class Repl
     {
         private readonly IConsole _console;
-        private readonly Interpreter _interpreter;
+        private readonly CommandProcessor _processor;
 
-        public Repl(IConsole console, Interpreter interpreter)
+        public Repl(IConsole console, CommandProcessor processor)
         {
             _console = console;
-            _interpreter = interpreter;
+            _processor = processor;
         }
 
         public async Task Start()
@@ -25,7 +25,7 @@ namespace Octocat
 
                 try
                 {
-                    await _interpreter.Interpret(input);
+                    await _processor.Process(input);
                 }
                 catch (ExitApplicationException)
                 {
@@ -37,6 +37,8 @@ namespace Octocat
                 }
 
             } while (true);
+
+            _console.WriteLine("Octocat sez 'I can haz cheezeburger?!?'");
         }
     }
 }

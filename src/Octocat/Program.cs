@@ -1,25 +1,14 @@
 ﻿using System.Threading.Tasks;
-using Octokit;
 
 namespace Octocat
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var client = CreateClient(args);
-            var console = new ConsoleImpl();
-
-            var interpreter = new Interpreter(client, console);
-
-            var repl = new Repl(console, interpreter);
+            var repl = new Bootstrapper().Bootstrap();
 
             Task.WaitAll(repl.Start());
-        }
-
-        private static IGitHubClient CreateClient(string[] args)
-        {
-            return new GitHubClientBootstrapper().CreateClient(args);
         }
     }
 }

@@ -4,5 +4,6 @@
     {
         void WriteLine(string output);
         string ReadLine();
+        void Clear();
     }
 }

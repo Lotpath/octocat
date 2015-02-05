@@ -1,3 +1,8 @@
+### New in 0.2.1 (Release 2015/02/04)
+* Cleaned up Interpreter separation of concerns violation
+* Introduced CommandProcessor to build command handlers and invoke commands
+* Added Clear Console command
+
 ### New in 0.2.0 (Release 2015/02/03)
 * Create a milestone
 * Assign a team to a repository

@@ -7,12 +7,12 @@ namespace Octocat.Handlers
     public class DisplayHelpCommandHandler : ICommandHandler
     {
         private readonly IConsole _console;
-        private readonly IList<string> _commandDescriptions;
+        private readonly IEnumerable<string> _commandDescriptions;
 
-        public DisplayHelpCommandHandler(IConsole console, IEnumerable<ICommandHandler> commands)
+        public DisplayHelpCommandHandler(IConsole console, IEnumerable<string> commandDescriptions)
         {
             _console = console;
-            _commandDescriptions = commands.Select(x => x.ToString()).ToList();
+            _commandDescriptions = commandDescriptions;
         }
 
         public Task<bool> CanHandle(Command command)
@@ -33,6 +33,11 @@ namespace Octocat.Handlers
             }
 
             return Task.Delay(0);
+        }
+
+        public override string ToString()
+        {
+            return "? or help to display help";
         }
     }
 }
