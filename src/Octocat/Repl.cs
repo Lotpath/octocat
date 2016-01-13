@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Octokit;
 
 namespace Octocat
 {
@@ -30,6 +31,11 @@ namespace Octocat
                 catch (ExitApplicationException)
                 {
                     break;
+                }
+                catch (ApiValidationException ex)
+                {
+                    _console.WriteLine(string.Format("{0}\r\n{1}", ex.HttpResponse.StatusCode, ex.HttpResponse.Body));
+                    _console.WriteLine(ex.ToString());
                 }
                 catch (Exception ex)
                 {
