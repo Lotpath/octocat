@@ -58,7 +58,7 @@ namespace Octocat.Tests
             A.CallTo(() => _client.Organization.Team.GetAll("org"))
              .Returns(new ReadOnlyCollection<Team>(new List<Team>
                  {
-                     new Team {Id = 99, Name = "devs"}
+                     new Team(new Uri("http://octocat.com/team/99"), 99, "devs", Permission.Admin, 0, 0, null)
                  }));
 
             await _processor.Process("assign team org/repo devs");
@@ -81,11 +81,11 @@ namespace Octocat.Tests
         public async Task can_delete_labels_for_a_repository()
         {
             A.CallTo(() =>
-                     _client.Issue.Labels.GetForRepository("org", "repo"))
+                     _client.Issue.Labels.GetAllForRepository("org", "repo"))
              .Returns(new ReadOnlyCollection<Label>(new List<Label>
                  {
-                     new Label {Name = "foo", Color = "000000"},
-                     new Label {Name = "bar", Color = "000000"},
+                     new Label(new Uri("http://octocat.com/label/foo"), "foo", "000000"),
+                     new Label(new Uri("http://octocat.com/label/bar"), "bar", "000000"),
                  }));
 
             await _processor.Process("delete labels org/repo");

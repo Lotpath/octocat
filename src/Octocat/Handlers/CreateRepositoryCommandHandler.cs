@@ -22,9 +22,8 @@ namespace Octocat.Handlers
 
         public async Task Handle(Command command)
         {
-            await _client.Repository.Create(command.Organization, new NewRepository
+            await _client.Repository.Create(command.Organization, new NewRepository(command.Repository)
                 {
-                    Name = command.Repository,
                     Private = true
                 });
         }

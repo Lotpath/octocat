@@ -22,7 +22,7 @@ namespace Octocat.Handlers
 
         public async Task Handle(Command command)
         {
-            var labels = await _client.Issue.Labels.GetForRepository(command.Organization, command.Repository);
+            var labels = await _client.Issue.Labels.GetAllForRepository(command.Organization, command.Repository);
 
             foreach (var label in labels)
             {
